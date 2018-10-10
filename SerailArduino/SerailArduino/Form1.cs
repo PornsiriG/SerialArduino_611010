@@ -29,12 +29,7 @@ namespace SerailArduino
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            serialPort1.BaudRate = Int32.Parse(comboBox2.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -64,9 +59,17 @@ namespace SerailArduino
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            serialPort1.PortName = comboBox1.Text;
+            Console.WriteLine(serialPort1.PortName);
+        }
 
+        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            string str = sp.ReadExisting();
+            Console.WriteLine(str);
         }
     }
 }
