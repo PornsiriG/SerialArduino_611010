@@ -70,6 +70,17 @@ namespace SerailArduino
             SerialPort sp = (SerialPort)sender;
             string str = sp.ReadExisting();
             Console.WriteLine(str);
+            textBox1.Invoke(myDelegate, str); // cross-thread problem!!
         }
+        public void AddData(string str)
+        {
+            textBox1.AppendText(str);
+        }
+
+        //declare delegate
+        public delegate void AddDataDelegate(string str);
+        public AddDataDelegate myDelegate;
+
+        //define delegate
     }
 }
